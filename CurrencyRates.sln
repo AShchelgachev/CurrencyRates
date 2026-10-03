@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{29A0A723-2F15-4F46-812D-9DA30EC51C0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrator", "src\Migrator\Migrator.csproj", "{4C1C5622-D8F4-41B0-85EA-5C83CCF008AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +14,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C1C5622-D8F4-41B0-85EA-5C83CCF008AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C1C5622-D8F4-41B0-85EA-5C83CCF008AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C1C5622-D8F4-41B0-85EA-5C83CCF008AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C1C5622-D8F4-41B0-85EA-5C83CCF008AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4C1C5622-D8F4-41B0-85EA-5C83CCF008AE} = {29A0A723-2F15-4F46-812D-9DA30EC51C0B}
 	EndGlobalSection
 EndGlobal
