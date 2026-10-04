@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{29A0A723-2F1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrator", "src\Migrator\Migrator.csproj", "{4C1C5622-D8F4-41B0-85EA-5C83CCF008AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyUpdater", "src\CurrencyUpdater\CurrencyUpdater.csproj", "{A6B28124-79C9-4E06-A623-3E28174DCF8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,8 +22,13 @@ Global
 		{4C1C5622-D8F4-41B0-85EA-5C83CCF008AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C1C5622-D8F4-41B0-85EA-5C83CCF008AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C1C5622-D8F4-41B0-85EA-5C83CCF008AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6B28124-79C9-4E06-A623-3E28174DCF8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6B28124-79C9-4E06-A623-3E28174DCF8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6B28124-79C9-4E06-A623-3E28174DCF8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6B28124-79C9-4E06-A623-3E28174DCF8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4C1C5622-D8F4-41B0-85EA-5C83CCF008AE} = {29A0A723-2F15-4F46-812D-9DA30EC51C0B}
+		{A6B28124-79C9-4E06-A623-3E28174DCF8A} = {29A0A723-2F15-4F46-812D-9DA30EC51C0B}
 	EndGlobalSection
 EndGlobal
