@@ -27,8 +27,9 @@ Api             контроллеры, регистрация зависимо�
 ## Требования
 
 - Docker (Docker Desktop) — для запуска всей системы или только PostgreSQL.
-- .NET 8 SDK — для сборки и запуска без Docker.
-- Visual Studio 2022 (17.8 и новее) или Rider — по желанию.
+- .NET SDK 8 или новее — для сборки без Docker. Если установлен SDK 8, используется он, иначе ближайший более новый (например, SDK 9 из Visual Studio 2022 17.12+). Это задано в `global.json`.
+- .NET 8 Runtime (ASP.NET Core) — для запуска сервисов без Docker. Входит в .NET 8 SDK.
+- Visual Studio 2022 или Rider — по желанию.
 
 ## Запуск в Docker
 
@@ -39,6 +40,7 @@ docker compose up -d --build
 Порядок старта: `postgres` → `migrator` (применяет миграции и завершается) → `currency-updater`, `user-service`, `finance-service` → `gateway`.
 
 - Gateway: **http://localhost:5000** — единственный открытый наружу сервис.
+- Swagger UI: **http://localhost:5000/swagger**.
 - PostgreSQL: `localhost:5433`, база `currency`, пользователь `postgres`, пароль `postgres`.
 
 Остановить: `docker compose stop`. Данные хранятся в volume `pgdata`.
@@ -70,6 +72,16 @@ dotnet test
 ## API
 
 Все адреса указаны относительно Gateway (`http://localhost:5000`). Готовые запросы лежат в [`requests.http`](requests.http), их можно выполнить из Visual Studio или Rider.
+
+### Swagger
+
+Swagger UI для обоих сервисов открывается через Gateway: **http://localhost:5000/swagger**. Сервис выбирается в списке справа вверху (UserService или FinanceService).
+
+1. В UserService выполнить `POST /api/users/register`, затем `POST /api/users/login` и скопировать `token` из ответа.
+2. Нажать **Authorize** и вставить токен без слова `Bearer`.
+3. Переключиться на FinanceService и выполнять запросы. Токен запоминается в браузере, поэтому вводить его заново при переключении сервиса или перезагрузке страницы не нужно.
+
+Описания API сервисы отдают сами (`/swagger/v1/swagger.json`), а Gateway проксирует их по адресам `/swagger/users/swagger.json` и `/swagger/finance/swagger.json`. Запросы из Swagger UI идут через Gateway так же, как от любого другого клиента.
 
 | Метод | Путь | Авторизация | Описание | Ответы |
 |---|---|---|---|---|
