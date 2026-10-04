@@ -4,7 +4,6 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>dotnet-CurrencyUpdater-38f20c0f-e688-4cde-85d1-71c93f05db66</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

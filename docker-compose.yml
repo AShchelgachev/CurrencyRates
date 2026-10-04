@@ -9,6 +9,64 @@ services:
       - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d currency"]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+
+  migrator:
+    build:
+      context: .
+      dockerfile: src/Migrator/Dockerfile
+    environment:
+      ConnectionStrings__Default: Host=postgres;Port=5432;Database=currency;Username=postgres;Password=postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  currency-updater:
+    build:
+      context: .
+      dockerfile: src/CurrencyUpdater/Dockerfile
+    environment:
+      ConnectionStrings__Default: Host=postgres;Port=5432;Database=currency;Username=postgres;Password=postgres
+    depends_on:
+      migrator:
+        condition: service_completed_successfully
+
+  user-service:
+    build:
+      context: .
+      dockerfile: src/UserService/UserService.Api/Dockerfile
+    environment:
+      ConnectionStrings__Default: Host=postgres;Port=5432;Database=currency;Username=postgres;Password=postgres
+    depends_on:
+      migrator:
+        condition: service_completed_successfully
+
+  finance-service:
+    build:
+      context: .
+      dockerfile: src/FinanceService/FinanceService.Api/Dockerfile
+    environment:
+      ConnectionStrings__Default: Host=postgres;Port=5432;Database=currency;Username=postgres;Password=postgres
+    depends_on:
+      migrator:
+        condition: service_completed_successfully
+
+  gateway:
+    build:
+      context: .
+      dockerfile: src/Gateway/Dockerfile
+    environment:
+      ReverseProxy__Clusters__users__Destinations__default__Address: http://user-service:8080
+      ReverseProxy__Clusters__finance__Destinations__default__Address: http://finance-service:8080
+    ports:
+      - "5000:8080"
+    depends_on:
+      - user-service
+      - finance-service
 
 volumes:
   pgdata:

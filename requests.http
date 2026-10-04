@@ -1,0 +1,43 @@
+### Все запросы идут через Gateway
+@gateway = http://localhost:5000
+
+# После логина скопируйте сюда значение token из ответа
+@token = paste-token-here
+
+### Регистрация
+POST {{gateway}}/api/users/register
+Content-Type: application/json
+
+{
+  "name": "alex",
+  "password": "secret123"
+}
+
+### Логин
+POST {{gateway}}/api/users/login
+Content-Type: application/json
+
+{
+  "name": "alex",
+  "password": "secret123"
+}
+
+### Все валюты (id для избранного берётся отсюда)
+GET {{gateway}}/api/finance/currencies
+Authorization: Bearer {{token}}
+
+### Добавить валюту в избранное
+POST {{gateway}}/api/finance/favorites/16
+Authorization: Bearer {{token}}
+
+### Курсы избранных валют пользователя
+GET {{gateway}}/api/finance/rates
+Authorization: Bearer {{token}}
+
+### Убрать валюту из избранного
+DELETE {{gateway}}/api/finance/favorites/16
+Authorization: Bearer {{token}}
+
+### Логаут: после него токен перестаёт работать в обоих сервисах
+POST {{gateway}}/api/users/logout
+Authorization: Bearer {{token}}
